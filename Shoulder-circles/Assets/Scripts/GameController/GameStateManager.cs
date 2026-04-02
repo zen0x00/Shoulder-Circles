@@ -11,7 +11,9 @@ public class GameStateManager : MonoBehaviour
         InitialState,
         Playing,
         Win,
-        Lose
+        Lose,
+        Orbiting,
+        Coasting
     }
     public GameState CurrentState;
     void Awake()
