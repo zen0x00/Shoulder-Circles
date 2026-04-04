@@ -54,6 +54,9 @@ public class ShipInputController : MonoBehaviour
         float y = currentPlanet.transform.position.y;
 
         transform.position = new  Vector3(x,0,z);
+
+        transform.LookAt(currentPlanet.transform.position);
+        transform.Rotate(0,90f,0);
         
     }
 

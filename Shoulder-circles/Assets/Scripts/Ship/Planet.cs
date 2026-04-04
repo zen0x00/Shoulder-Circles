@@ -8,8 +8,13 @@ public class Planet : MonoBehaviour
     private LineRenderer orbitRing;
     private int LineSegments = 64;
 
+    public float rotationSpeed = 0.05f;
+    private float defaultRadius;
+
     void Start()
     {
+        defaultRadius = orbitRadius; 
+
         orbitRing = GetComponent<LineRenderer>();
 
         //LineRenderer
@@ -20,12 +25,16 @@ public class Planet : MonoBehaviour
         orbitRing.useWorldSpace = true;
 
         //white Color
-        orbitRing.startColor = new Color(1f, 1f, 1f, 0.3f);
-        orbitRing.endColor = new Color(1f, 1f, 1f, 0.3f);
+        orbitRing.startColor = new Color(1f, 1f, 1f, 0.8f);
+        orbitRing.endColor = new Color(1f, 1f, 1f, 0.8f);
 
 
 
         DrawnRing();
+    }
+    void Update()
+    {
+        transform.Rotate(0,-rotationSpeed,0);
     }
     public void DrawnRing()
     {
@@ -43,5 +52,19 @@ public class Planet : MonoBehaviour
         orbitRadius = radius;
         DrawnRing();
     }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("SpaceShip"))
+        {
+            ResetRadius();
+            Debug.Log("Ship left planet → Reset radius");
+        }
+    }
+    void ResetRadius()
+    {
+        orbitRadius = defaultRadius;
+        DrawnRing();
+    }
+        
 
 }
